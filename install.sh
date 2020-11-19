@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt update && apt install docker-compose docker.io git
+apt update && apt install -y docker-compose docker.io git
 
 mkdir config
 
