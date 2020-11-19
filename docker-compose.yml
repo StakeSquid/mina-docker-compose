@@ -19,8 +19,7 @@ services:
         read_only: true
       - type: bind
         source: config
-        target: /root/.coda-config
-      - "./peers.txt:/root/peers.txt"
+        target: /root
     command: ["daemon", "-config-file", "/root/.coda-config/daemon.json", "-peer-list-file", "/root/peers.txt", "-block-producer-key", "/keys/my-wallet", "-block-producer-password", "$PASSWORD", "-run-snark-worker", "$PUBLIC_KEY", "-snark-worker-fee", "$WORKER_FEE", "-insecure-rest-server", "-log-level Info"]
     expose:
       - 8301
