@@ -17,10 +17,8 @@ services:
         source: ./keys
         target: /keys
         read_only: true
-      - type: bind
-        source: config
-        target: /root
-    command: ["daemon", "-config-file", "/root/.coda-config/daemon.json", "-peer-list-file", "/root/peers.txt", "-block-producer-key", "/keys/my-wallet", "-block-producer-password", "$PASSWORD", "-run-snark-worker", "$PUBLIC_KEY", "-snark-worker-fee", "$WORKER_FEE", "-insecure-rest-server", "-log-level Info"]
+      - "./config:/root/.mina-config"
+    command: ["daemon", "-peer-list-file", "/root/.mina-config/peers.txt", "-block-producer-key", "/keys/my_wallet", "-block-producer-password", "$PASSWORD", "-run-snark-worker", "$PUBLIC_KEY", "-snark-worker-fee", "$WORKER_FEE", "-insecure-rest-server"]
     expose:
       - 8301
       - 8302
@@ -37,7 +35,8 @@ services:
     image: c29r3/snark-stopper
     restart: unless-stopped
     container_name: mina-stopper
-    command: ["bash"]
+    depends_on:
+      - daemon
     networks:
       - mina-net
     volumes:
@@ -48,4 +47,4 @@ services:
     volumes:
       - ./keys:/keys
       - ./config:/config
-    # command: yq w -i /config/stopper.yml WORKER_PUBLIC_KEY ${PUBLIC_KEY} && yq w -i /config/stopper.yml WORKER_FEE ${WORKER_FEE}
+

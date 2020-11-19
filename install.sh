@@ -12,7 +12,18 @@ wget -O config/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-aut
 echo "$1" > keys/my_wallet.pub
 echo "$2" > keys/my_wallet
 
-docker-compose run stopper-config yq w -i /config/stopper.yml WORKER_PUBLIC_KEY ${PUBLIC_KEY}
-docker-compose run stopper-config yq w -i /config/stopper.yml WORKER_FEE ${WORKER_FEE}
+chmod 600 keys/my_wallet
+chmod 700 keys
 
-PUBLIC_KEY=$1 PASSWORD=$3 WORKER_FEE=$4 docker-compose up -d daemon
+PUBLIC_KEY=$1
+WORKER_FEE=$4
+
+echo "PUBLIC_KEY=$1" > .env
+echo "WORKER_FEE=$4" >> .env
+echo "PASSWORD=$3" >> .env
+
+docker-compose run stopper-config yq w -i /config/stopper.yml WORKER_PUBLIC_KEY $PUBLIC_KEY
+docker-compose run stopper-config yq w -i /config/stopper.yml WORKER_FEE $WORKER_FEE
+
+docker-compose up -d
+
