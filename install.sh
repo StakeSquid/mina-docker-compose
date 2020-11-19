@@ -9,6 +9,8 @@ cp stopper.yml.template config/stopper.yml
 
 wget -O config/peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/peers.txt
 
+mkdir keys
+
 echo "$1" > keys/my_wallet.pub
 echo "$2" > keys/my_wallet
 
