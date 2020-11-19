@@ -4,6 +4,10 @@ apt update && apt install docker-compose docker.io git
 
 wget -O peers.txt https://raw.githubusercontent.com/MinaProtocol/coda-automation/master/terraform/testnets/turbo-pickles/peers.txt
 
+mkdir config
+cp daemon.json.template config/daemon.json
+cp stopper.yml.template config/stopper.yml
+
 echo "$1" > keys/my_wallet.pub
 echo "$2" > keys/my_wallet
 

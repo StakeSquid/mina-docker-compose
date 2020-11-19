@@ -1,0 +1,19 @@
+WORKER_PUB_KEY: YOUR_PUBLIC_KEY
+# specified in nanocoda
+# 1 CODA = 1,000,000,000 nanocoda
+WORKER_FEE: 1
+
+# how often to check `next proposal time` (seconds)
+CHECK_PERIOD_SEC: 120
+
+# the period after which the worker will be started again (minutes)
+STOP_WORKER_FOR_MIN: 10
+
+# how many minutes before 'next proposal' the worker will be turned off
+STOP_WORKER_BEFORE_MIN: 10
+
+# ip address of graphql api (by default 127.0.0.1)
+GRAPHQL_HOST: mina-daemon
+
+# graphql port (by default 8305)
+GRAPHQL_PORT: 3085
