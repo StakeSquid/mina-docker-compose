@@ -1,0 +1,52 @@
+version: '3.2'
+
+networks:
+  mina-net:
+    driver: bridge
+
+services:
+  daemon:
+    image: minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina757342b-auto811bf26
+    container_name: mina-daemon
+    environment:
+      PASSWORD: ${PASSWORD:-123456}
+      WORKER_FEE: ${WORKER_FEE:-1}
+      PUBLIC_KEY: ${PUBLIC_KEY}
+    volumes:
+      - type: bind
+        source: ./keys
+        target: /keys
+        read_only: true
+      - type: bind
+        source: config
+        target: /root/.coda-config
+      - "./peers.txt:/root/peers.txt"
+    command: ["daemon", "-config-file", "/root/.coda-config/daemon.json", "-peer-list-file", "/root/peers.txt", "-block-producer-key", "/keys/my-wallet", "-block-producer-password", "$PASSWORD", "-run-snark-worker", "$PUBLIC_KEY", "-snark-worker-fee", "$WORKER_FEE", "-insecure-rest-server", "-log-level Info"]
+    expose:
+      - 8301
+      - 8302
+      - 8303
+      - 8304
+      - 3085
+    ports:
+      - "8302:8302/udp"
+      - "8302:8302/tcp"
+    networks:
+      - mina-net
+      
+  stopper:
+    image: c29r3/snark-stopper
+    restart: unless-stopped
+    container_name: mina-stopper
+    command: ["bash"]
+    networks:
+      - mina-net
+    volumes:
+      - ./config/stopper.yml:/mina/config.yml
+
+  stopper-config:
+    image: mikefarah/yq
+    volumes:
+      - ./keys:/keys
+      - ./config:/config
+    # command: yq w -i /config/stopper.yml WORKER_PUBLIC_KEY ${PUBLIC_KEY} && yq w -i /config/stopper.yml WORKER_FEE ${WORKER_FEE}
