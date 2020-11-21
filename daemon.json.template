@@ -1,5 +1,6 @@
 {
   "client-port": 8301,
   "libp2p-port": 8302,
-  "rest-port": 3085
+  "rest-port": 3085,
+  "snark-worker-parallelism": 8
 }
