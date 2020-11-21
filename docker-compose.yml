@@ -18,7 +18,7 @@ services:
         target: /keys
         read_only: true
       - "./config:/root/.mina-config"
-    command: ["daemon", "-peer-list-file", "/root/.mina-config/peers.txt", "-block-producer-key", "/keys/my_wallet", "-block-producer-password", "$PASSWORD", "-run-snark-worker", "$PUBLIC_KEY", "-snark-worker-fee", "$WORKER_FEE", "-insecure-rest-server"]
+    command: ["daemon", "-peer-list-file", "/root/.mina-config/peers.txt", "-block-producer-key", "/keys/my_wallet", "-block-producer-password", "$PASSWORD", "-run-snark-worker", "$PUBLIC_KEY", "-snark-worker-fee", "$WORKER_FEE", "-insecure-rest-server", "-snark-worker-parallelism", "12"]
     expose:
       - 8301
       - 8302
