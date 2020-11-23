@@ -27,7 +27,7 @@ services:
       - 3085
     ports:
       - "${PUBLIC_IP:-0.0.0.0}:8302:8302/udp"
-      - "${PUBLIC_IP:-0.0.0.0}8302:8302/tcp"
+      - "${PUBLIC_IP:-0.0.0.0}:8302:8302/tcp"
     networks:
       - mina-net
       
