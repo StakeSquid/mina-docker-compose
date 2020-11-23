@@ -23,6 +23,7 @@ WORKER_FEE=$4
 echo "PUBLIC_KEY=$1" > .env
 echo "WORKER_FEE=$4" >> .env
 echo "PASSWORD=$3" >> .env
+echo "PUBLIC_IP=$4" >> .env
 
 docker-compose run stopper-config yq w -i /config/stopper.yml WORKER_PUBLIC_KEY $PUBLIC_KEY
 docker-compose run stopper-config yq w -i /config/stopper.yml WORKER_FEE $WORKER_FEE
