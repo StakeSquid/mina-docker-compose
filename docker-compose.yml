@@ -7,7 +7,6 @@ networks:
 services:
   daemon:
     image: minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina757342b-auto811bf26
-    container_name: mina-daemon
     environment:
       PASSWORD: ${PASSWORD:-123456}
       WORKER_FEE: ${WORKER_FEE:-1}
@@ -34,7 +33,6 @@ services:
   stopper:
     image: c29r3/snark-stopper
     restart: unless-stopped
-    container_name: mina-stopper
     depends_on:
       - daemon
     networks:
