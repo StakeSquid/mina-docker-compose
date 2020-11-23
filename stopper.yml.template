@@ -13,7 +13,7 @@ STOP_WORKER_FOR_MIN: 10
 STOP_WORKER_BEFORE_MIN: 10
 
 # ip address of graphql api (by default 127.0.0.1)
-GRAPHQL_HOST: mina-daemon
+GRAPHQL_HOST: daemon
 
 # graphql port (by default 8305)
 GRAPHQL_PORT: 3085
