@@ -6,7 +6,7 @@ networks:
 
 services:
   daemon:
-    image: minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina757342b-auto811bf26
+    image: minaprotocol/mina-daemon-baked:4.1-turbo-pickles-mina4a053a4-auto8a44ae5
     environment:
       PASSWORD: ${PASSWORD:-123456}
       WORKER_FEE: ${WORKER_FEE:-1}
